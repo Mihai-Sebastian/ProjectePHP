@@ -13,7 +13,7 @@
     <div class="max-w-md bg-white shadow-md rounded-lg p-6 text-center"> <!-- Afegit text-center -->
         <h1 class="text-3xl font-bold mb-4">Delete Film</h1>
         <p>Vols eliminar la peli "<?= htmlspecialchars($film->name) ?>"?</p>
-        <form action="/destroy" method="POST" class="mt-4">
+        <form action="/films/destroy" method="POST" class="mt-4">
             <input type="hidden" name="id" value="<?= $film->id ?>">
             <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">Delete</button>
         </form>

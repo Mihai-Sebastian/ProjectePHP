@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Films</title>
+    <title>Games</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-200 flex flex-col min-h-screen">
@@ -11,31 +11,55 @@
 <?php require "../resources/views/layout/header.blade.php" ?>
 <div class="py-10 pt-28 flex-grow">
     <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
-        <h1 class="text-2xl font-bold mb-4">Add New Film</h1>
-        <form action="/films/store" method="POST" enctype="multipart/form-data">
+        <h1 class="text-2xl font-bold mb-4">Add New Game</h1>
+        <form action="/games/store" method="POST" enctype="multipart/form-data">
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Title:</label>
                 <input type="text" name="name" required class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                       placeholder="Enter film title">
+                       placeholder="Enter game title">
             </div>
 
             <div class="mb-4">
-                <label for="director" class="block text-sm font-medium text-gray-700">Director:</label>
-                <input type="text" name="director" required
+                <label for="developer" class="block text-sm font-medium text-gray-700">Developer:</label>
+                <input type="text" name="developer" required
                        class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                       placeholder="Enter director's name">
+                       placeholder="Enter developer's name">
             </div>
 
             <div class="mb-4">
-                <label for="year" class="block text-sm font-medium text-gray-700">Release Year:</label>
-                <input type="number" name="year" required
-                       class="mt-1 block w-full border border-gray-300 rounded-md p-2" placeholder="Enter release year">
+                <label for="release_date" class="block text-sm font-medium text-gray-700">Release Date:</label>
+                <input type="date" name="release_date" required
+                       class="mt-1 block w-full border border-gray-300 rounded-md p-2">
             </div>
 
             <div class="mb-4">
-                <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
-                <textarea name="description" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                          placeholder="Enter a description"></textarea>
+                <label for="rating" class="block text-sm font-medium text-gray-700">Rating:</label>
+                <input type="number" name="rating" required step="0.5" min="0" max="5"
+                       class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                       placeholder="Enter game rating (0 - 5)">
+            </div>
+
+
+            <div class="mb-4">
+                <label for="platform" class="block text-sm font-medium text-gray-700">Platform:</label>
+                <input type="text" name="platform" required
+                       class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                       placeholder="Enter platform (e.g. PC, PS5, Xbox)">
+            </div>
+
+            <div class="mb-4">
+                <label for="multiplayer" class="block text-sm font-medium text-gray-700">Multiplayer:</label>
+                <select name="multiplayer" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+                    <option value="1">Yes</option>
+                    <option selected value="0">No</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
+                <input type="number" name="price" required step="0.01"
+                       class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                       placeholder="Enter game price">
             </div>
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Genres:</label>
@@ -122,11 +146,9 @@
                     </label>
                 </div>
             </div>
-
-            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add Film
-            </button>
+            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add Game</button>
         </form>
-        <a href="/films" class="text-gray-500 hover:underline mt-4 block">Return</a>
+        <a href="/games" class="text-gray-500 hover:underline mt-4 block">Return</a>
     </div>
 </div>
 <?php require "../resources/views/layout/footer.blade.php" ?>

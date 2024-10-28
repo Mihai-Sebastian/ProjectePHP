@@ -12,22 +12,22 @@
 <div class="py-10 pt-28 flex-grow flex items-center justify-center">
     <div class="max-w-3xl w-full bg-white shadow-md rounded-lg p-8 text-center">
         <h1 class="text-3xl font-bold mb-6">Edit Film</h1>
-        <form action="/update" method="POST">
+        <form action="/films/update" method="POST">
             <input type="hidden" name="id" value="<?= htmlspecialchars($film->id) ?>" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
 
             <div class="mb-6">
                 <label for="name" class="block text-gray-700">Name:</label>
-                <input type="text" name="name" value="<?= htmlspecialchars($film->name) ?>" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <input type="text" name="name" value="<?= htmlspecialchars($film->name) ?>" class="mt-1 block w-full border border-gray-300 rounded-md p-2" >
             </div>
 
             <div class="mb-6">
                 <label for="director" class="block text-gray-700">Director:</label>
-                <input type="text" name="director" value="<?= htmlspecialchars($film->director) ?>" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <input type="text" name="director" value="<?= htmlspecialchars($film->director) ?>" class="mt-1 block w-full border border-gray-300 rounded-md p-2" >
             </div>
 
             <div class="mb-6">
                 <label for="year" class="block text-gray-700">Year:</label>
-                <input type="number" name="year" value="<?= htmlspecialchars($film->year) ?>" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <input type="number" name="year" value="<?= htmlspecialchars($film->year) ?>" class="mt-1 block w-full border border-gray-300 rounded-md p-2" >
             </div>
 
             <div class="mb-6">

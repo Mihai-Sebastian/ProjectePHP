@@ -14,7 +14,7 @@
     <div class="py-10 pt-28 flex-grow">
         <div class="max-w-6xl mx-auto shadow-lg bg-white rounded-lg p-6">
             <h1 class="text-3xl font-bold mb-4 text-gray-800">Films</h1>
-            <a href="/create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Add New Film</a>
+            <a href="/films/create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Add New Film</a>
             <div class="overflow-x-auto mt-4"> <!-- Afegit overflow-x-auto -->
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg">
                     <thead>
@@ -40,11 +40,11 @@
                         <td class="py-3 px-6"><?= htmlspecialchars($film['director']) ?></td>
                         <td class="py-3 px-6"><?= htmlspecialchars($film['year']) ?></td>
                         <td class="py-3 px-6 text-center">
-                            <a href="/edit/<?= $film['id'] ?>" class="text-blue-500 hover:text-blue-700 transition mr-4">Edit</a>
-                            <a href="/delete/<?= $film['id'] ?>" class="text-red-500 hover:text-red-700 transition">Delete</a>
+                            <a href="/films/edit/<?= $film['id'] ?>" class="text-blue-500 hover:text-blue-700 transition mr-4">Edit</a>
+                            <a href="/films/delete/<?= $film['id'] ?>" class="text-red-500 hover:text-red-700 transition">Delete</a>
                         </td>
                         <td class="text-center">
-                            <a href="/show/<?= $film['id'] ?>" class="text-blue-500 hover:text-blue-700 transition">More Info</a>
+                            <a href="/films/show/<?= $film['id'] ?>" class="text-blue-500 hover:text-blue-700 transition">More Info</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

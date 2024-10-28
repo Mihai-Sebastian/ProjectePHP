@@ -1,0 +1,64 @@
+CREATE TABLE games (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    developer VARCHAR(100) NOT NULL,
+    release_date DATE,
+    rating DECIMAL(2, 1) CHECK (rating BETWEEN 0 AND 5),
+    platform VARCHAR(50),
+    multiplayer BOOLEAN DEFAULT FALSE,
+    price DECIMAL(5, 2)
+);
+
+
+CREATE TABLE game_genres (
+    game_id INT NOT NULL,
+    genre_id INT NOT NULL,
+    PRIMARY KEY (game_id, genre_id),
+    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE,
+    FOREIGN KEY (genre_id) REFERENCES genres(id) ON DELETE CASCADE
+);
+
+Inserts a games
+INSERT INTO games (title, developer, release_date, rating, platform, multiplayer, price)
+VALUES
+     ('Persona 5', 'Atlus', '2016-09-15', 4.9, 'PlayStation 4', FALSE, 59.99),
+     ('Metaphor: ReFantazio', 'Studio Zero', '2024-01-01', 4.2, 'PlayStation 5', FALSE, 69.99),
+     ('Xenoblade Chronicles 3', 'Monolith Soft', '2022-07-29', 4.8, 'Nintendo Switch', FALSE, 59.99),
+     ('Final Fantasy XVI', 'Square Enix', '2023-06-22', 4.5, 'PlayStation 5', FALSE, 69.99),
+     ('Dragon Quest XI', 'Square Enix', '2017-07-29', 4.7, 'PlayStation 4', FALSE, 49.99);
+
+Inserts a genres
+INSERT INTO genres (id, name) VALUES
+(1, 'Sci-Fi'),
+(2, 'Action'),
+(3, 'Drama'),
+(4, 'Crime'),
+(5, 'Thriller'),
+(6, 'Romance'),
+(7, 'Adventure'),
+(8, 'Fantasy'),
+(9, 'Comedy'),
+(10, 'Historical'),
+(11, 'Horror'),
+(12, 'JRPG'),
+(13, 'Mystery'),
+(14, 'Survival'),
+(15, 'Open World'),
+(16, 'Strategy'),
+(17, 'Puzzle'),
+(18, 'Platformer'),
+(19, 'Shooter'),
+(20, 'RPG');
+
+Insert a games genres
+INSERT INTO game_genres (game_id, genre_id) VALUES
+(1, 12),
+(1, 7),
+(2, 12),
+(2, 8),
+(3, 12),
+(3, 7),
+(4, 12),
+(4, 8),
+(5, 12),
+(5, 7);

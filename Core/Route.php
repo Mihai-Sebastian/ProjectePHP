@@ -2,6 +2,7 @@
 //Fitxer per gestionar les rutes
 namespace Core;
 
+use App\Controllers\GamesController;
 use RuntimeException;
 
 class Route
@@ -30,6 +31,7 @@ class Route
         //indiquem ruta del controlador
         $controllerLanding = 'App\Controllers\LandingController';
         $controller = 'App\Controllers\FilmController';
+        $controllerGames = 'App\Controllers\GamesController';
         //Inici
         if ($uri === '/') {
             require '../App/Controllers/LandingController.php';
@@ -50,23 +52,42 @@ class Route
             $controllerInstance = new $controller();
             return $controllerInstance->index();
         }
+        else if ($uri === '/games') {
+            require '../App/Controllers/GamesController.php';
+            //creem nova instancia
+            $controllerInstance = new $controllerGames();
+            return $controllerInstance->index();
+        }
 
         //create
-        if($parts[0] === 'create') {
+        if($parts[0] === 'films' && $parts[1] === 'create') {
             require '../App/Controllers/FilmController.php';
             //creem nova instancia
             $controllerInstance = new $controller();
             return $controllerInstance->create();
         }
-
-        if($parts[0] === 'show' && isset($parts[1])) {
+        //create
+        else if($parts[0] === 'games' && $parts[1] === 'create') {
+            require '../App/Controllers/GamesController.php';
+            //creem nova instancia
+            $controllerInstance = new $controllerGames();
+            return $controllerInstance->create();
+        }
+        if($parts[0] === 'films' && $parts[1] === 'show' && isset($parts[2])) {
             require '../App/Controllers/FilmController.php';
             //creem nova instancia
             $controllerInstance = new $controller();
-            return $controllerInstance->show($parts[1]);
+            return $controllerInstance->show($parts[2]);
         }
+        else if($parts[0] === 'games' && $parts[1] === 'show' && isset($parts[2])) {
+            require '../App/Controllers/GamesController.php';
+            //creem nova instancia
+            $controllerInstance = new $controllerGames();
+            return $controllerInstance->show($parts[2]);
+        }
+
         //Utilitzant POST guardem
-        if ($parts[0] === 'store' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($parts[0]==='films' && $parts[1] === 'store' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             require '../App/Controllers/FilmController.php';
             //creem nova instancia
             $controllerInstance = new $controller();
@@ -74,19 +95,34 @@ class Route
             $data = $_POST;
             return $controllerInstance->store($data);
         }
+        else if ($parts[0]==='games' && $parts[1] === 'store' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
+            require '../App/Controllers/GamesController.php';
+            //creem nova instancia
+            $controllerInstance = new $controllerGames();
+            //creem variable per agafar les dades de la petició post
+            $data = $_POST;
+            return $controllerInstance->store($data);
+        }
 
         //delete en GET  mirem que sigue delete en la id
-        if($parts[0] === 'delete' && $parts[1]) {
+        if($parts[0] === 'films' && $parts[1] === 'delete' && isset($parts[2])) {
             require '../App/Controllers/FilmController.php';
             //creem nova instancia
             $controllerInstance = new $controller();
-            return $controllerInstance->delete($parts[1]);
+            return $controllerInstance->delete($parts[2]);
+        }
+        else if($parts[0] === 'games' && $parts[1] === 'delete' && isset($parts[2])) {
+
+            require '../App/Controllers/GamesController.php';
+            //creem nova instancia
+            $controllerInstance = new $controllerGames();
+            return $controllerInstance->delete($parts[2]);
         }
 
 
         //destroy en POST
-        if ($parts[0] === 'destroy' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($parts[0] === 'films' && $parts[1] === 'destroy' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             require '../App/Controllers/FilmController.php';
             //creem nova instancia
             $controllerInstance = new $controller();
@@ -96,21 +132,52 @@ class Route
             }
             return $controllerInstance->destroy($_POST['id']);
         }
+        else if ($parts[0] === 'games' && $parts[1] === 'destroy' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            require '../App/Controllers/GamesController.php';
+            //creem nova instancia
+            $controllerInstance = new $controllerGames();
+            //comprovem si pasen id
+            if (!isset($_POST['id'])){
+                throw new RuntimeException('No id provided');
+            }
+            return $controllerInstance->destroy($_POST['id']);
+        }
 
 
         //edit en GET
-        if($parts[0] === 'edit' && $parts[1]) {
+        if($parts[0] === 'films' && $parts[1] === 'edit' && isset($parts[2])) {
+
             require '../App/Controllers/FilmController.php';
             //creem nova instancia
             $controllerInstance = new $controller();
-            return $controllerInstance->edit($parts[1]);
+            return $controllerInstance->edit($parts[2]);
+        }
+        else if($parts[0] === 'games' && $parts[1] === 'edit' && isset($parts[2])) {
+
+            require '../App/Controllers/GamesController.php';
+            //creem nova instancia
+            $controllerInstance = new $controllerGames();
+            return $controllerInstance->edit($parts[2]);
         }
 
         //Actualitzar en POST
-        if ($parts[0] === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($parts[0] =='films' && $parts[1] === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             require '../App/Controllers/FilmController.php';
             //creem nova instancia
             $controllerInstance = new $controller();
+            //creem variable per agafar les dades de la petició post
+            $data = $_POST;
+            //comprovem si pasen id
+            if (!isset($_POST['id'])){
+                throw new RuntimeException('No id provided');
+            }
+            return $controllerInstance->update($_POST['id'], $data);
+        }
+        else if ($parts[0] =='games' && $parts[1] === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            require '../App/Controllers/GamesController.php';
+            //creem nova instancia
+            $controllerInstance = new $controllerGames();
             //creem variable per agafar les dades de la petició post
             $data = $_POST;
             //comprovem si pasen id
